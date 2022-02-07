@@ -41,13 +41,16 @@ var server_data = {
 
 // TODO: Componente edit-form
 Vue.component('edit-form', {
-
+    template: '#editForm'
 })
 
 // TODO: Componente item-data
 Vue.component('item-data', {
-
-})
+    template: '#itemData',
+    props: {
+        
+    }
+})  
 
 // Aplicación VueJS
 // La aplicación recibe los datos en la variable de datos "col"

@@ -30,8 +30,11 @@
 
             <div class="row" style="margin-left:80px;">
                 <div class="col-xs-12" v-for="item in col.collection.items"> <!-- Crea un card por cada elemento del array-->
-                    
-                    <item-data :prompt="item" :value="item"></item-data>
+                    <item-data 
+                        v-for="dato in item.data"
+                        :prompt="dato.prompt"
+                        :value="dato.value"
+                    ></item-data>
                 </div>
             </div>
         </div>
@@ -50,10 +53,10 @@
         <script type="text/x-template" id="itemData">
 
             <div class="card" style="width: 20rem;">
-                <div class="card-body">                
-                    <dl v-for="dato in item.data">       
-                        <dt> prompt </dt>
-                        <dd> value </dd>
+                <div class="card-body">  
+                    <dl>       
+                        <dt> {{prompt}} </dt>
+                        <dd> {{value}} </dd>
                     </dl>
                     <!-- <a v-bind:href=item.href class="btn btn-primary">Ver</a> -->
                 </div>

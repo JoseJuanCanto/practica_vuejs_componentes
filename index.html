@@ -19,24 +19,20 @@
         <div id="app">
             <!--
                  TODO: Aplicación VueJS. Ver archivo ./js/script.js
-                 - Para cada item: (https://vuejs.org/v2/guide/index.html#Conditionals-and-Loops)
-                 - Crear un componente item-data
+                 
                 -->
                 
             <!-- - Mostrar el título de la colección dentro de un componente Jumbotron de Bootstrap https://getbootstrap.com/docs/4.0/components/jumbotron/. En su interior habrá un <h1> con id "title" que mostrará el título de la colección -->
             <div class="jumbotron">
                 <h1 class="display-4" id="title">{{ col.collection.title }}</h1>
             </div>
-
+           <!--  Para cada item:  Crear un componente item-data -->
             <div class="row" style="margin-left:80px;">
-                <div class="col-xs-12" v-for="item in col.collection.items"> <!-- Crea un card por cada elemento del array-->
-                    <div class="card" style="width: 20rem;"> <!-- Item == Card -->
-                        <!-- dato == {name : "name", value : "The Lord of the Rings", prompt : "Name"} -->
-                        <item-data 
-                            v-for="dato in item.data"
-                            :prompt="dato.prompt"
-                            :value="dato.value"
+                <div class="col-xs-12" v-for="item in col.collection.items">
+                        <item-data
+                            v-bind:peli="item" 
                         ></item-data>
+                        <!-- se pasa el objeto 'item' como prop al component y ahí lo he llamado peli-->
                     </div>
                 </div>
             </div>
@@ -45,9 +41,7 @@
         <!-- Plantilla para el componente edit-form -->
         <script type="text/x-template" id="editForm">
 
-            <!--
-                 TODO: Componente edit-form
-            -->
+            
 
         </script>
 
@@ -55,12 +49,16 @@
         <!-- Plantilla para el componente item-data -->
         <script type="text/x-template" id="itemData">
 
-            <div class="card-body">  
-                <dl>       
-                    <dt> {{prompt}} </dt>
-                    <dd> {{value}} </dd>
-                </dl>
-            <!-- <a v-bind:href=item.href class="btn btn-primary">Ver</a> -->
+            <div class="card" style="width: 20rem;"> <!--ROOT ELEMENT-->
+                <div class="card-body">  
+                    <dl v-for="dato in peli.data">       
+                        <dt> {{dato.prompt}} </dt>
+                        <dd> {{dato.value}} </dd>
+                    </dl>
+                <a v-bind:href=peli.href class="btn btn-primary">Ver</a>
+                <a class="btn btn-secondary">Editar</a>
+
+                </div>
             </div>
 
         </script>

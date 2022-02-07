@@ -48,7 +48,7 @@ Vue.component('edit-form', {
 Vue.component('item-data', {
     template: '#itemData',
     props: {
-        
+        peli: Object,
     }
 })  
 

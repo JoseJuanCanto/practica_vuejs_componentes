@@ -17,15 +17,15 @@
         <div class="jumbotron">
             <h1 class="display-4" id="title">{{ col.collection.title }}</h1>
         </div>
-        <div class="card-group" style="margin:0 50px;">
-            <item-data 
+        <div class="card-group" style="margin:0 50px;"> <!-- v-for="(value, key, index) in object"   cada item es un objeto -->
+            <item-data                                  
             v-for="item in col.collection.items" 
-            v-if="!editArr.includes(col.collection.items.indexOf(item))"  
+            v-if="!arrayEditar.includes(col.collection.items.indexOf(item))"  
             :pelicula="item" 
-            :pos="col.collection.items.indexOf(item)" 
+            :indice="col.collection.items.indexOf(item)" 
             :key="col.collection.items.indexOf(item)"
             ></item-data>
-            <edit-form v-else :pelicula="item" :pos="col.collection.items.indexOf(item)"></edit-form>
+            <edit-form v-else :pelicula="item" :indice="col.collection.items.indexOf(item)"></edit-form>
          </div>
     </div>
 
@@ -35,10 +35,10 @@
             <div class="card-body">
                 <dl v-for="dato in pelicula.data">
                         <dt>{{dato.prompt}}</dt>
-                        <input v-if="dato.prompt != 'Description'" v-model="dato.value" type="text" v-bind:id="dato.name+pos" style="width:90%">
-                        <textarea v-else v-model="dato.value" type="text" v-bind:id="dato.name+pos" style="width:90%;height:20vh"></textarea>
+                        <input v-if="dato.prompt != 'Description'" v-model="dato.value" type="text" v-bind:id="dato.name+indice" style="width:90%">
+                        <textarea v-else v-model="dato.value" type="text" v-bind:id="dato.name+indice" style="width:90%;height:20vh"></textarea>
                 </dl>
-                <button v-on:click="closeForm(pos)"  class="btn btn-secondary">Guardar</button>
+                <button v-on:click="closeForm(indice)"  class="btn btn-secondary">Cerrar</button>
             </div>
         </div>
     </script>
@@ -52,7 +52,7 @@
                     <dd>{{dato.value}}</dd>
                 </dl>
                  <a v-bind:href="pelicula.href" class="btn btn-primary">Ver</a>
-                 <button v-on:click="toggleEditFormVisibility(pos)"  class="btn btn-secondary">Editar</button>
+                 <button v-on:click="toggleEditFormVisibility(indice)"  class="btn btn-secondary">Editar</button>
              </div>
          </div>
     </script>

@@ -20,7 +20,7 @@ var server_data = {
                 href : "https://en.wikipedia.org/wiki/The_Hunger_Games_(film_series)",
                 data : [
 		                {name : "name", value : "The Hunger Games", prompt : "Name"},
-                    {name : "description", value : "The Hunger Games film series consists of four science fiction dystopian adventure films based on The Hunger Games trilogy of novels, by the American author Suzanne Collins. Distributed by Lionsgate and produced by Nina Jacobson and Jon Kilik, it stars Jennifer Lawrence as Katniss Everdeen, Josh Hutcherson as Peeta Mellark, Woody Harrelson as Haymitch Abernathy, Elizabeth Banks as Effie Trinket, Philip Seymour Hoffman as Plutarch Heavensbee, Stanley Tucci as Caesar Flickerman, Donald Sutherland as President Snow, and Liam Hemsworth as Gale Hawthorne. Gary Ross directed the first film, while Francis Lawrence directed the next three films.", prompt : "Description"},
+                        {name : "description", value : "The Hunger Games film series consists of four science fiction dystopian adventure films based on The Hunger Games trilogy of novels, by the American author Suzanne Collins. Distributed by Lionsgate and produced by Nina Jacobson and Jon Kilik, it stars Jennifer Lawrence as Katniss Everdeen, Josh Hutcherson as Peeta Mellark, Woody Harrelson as Haymitch Abernathy, Elizabeth Banks as Effie Trinket, Philip Seymour Hoffman as Plutarch Heavensbee, Stanley Tucci as Caesar Flickerman, Donald Sutherland as President Snow, and Liam Hemsworth as Gale Hawthorne. Gary Ross directed the first film, while Francis Lawrence directed the next three films.", prompt : "Description"},
 		                {name : "director", value : "Gary Ross", prompt : "Director"},
 		                {name : "datePublished", value : "2012-03-12", prompt : "Release Date"}
                 ]
@@ -29,7 +29,7 @@ var server_data = {
                 href : "https://en.wikipedia.org/wiki/Game_of_Thrones",
                 data : [
 		                {name : "name", value : "Game of Thrones", prompt : "Name"},
-                    {name : "description", value : "Game of Thrones is an American fantasy drama television series created by David Benioff and D. B. Weiss. It is an adaptation of A Song of Ice and Fire, George R. R. Martin's series of fantasy novels, the first of which is A Game of Thrones. It is filmed in Belfast and elsewhere in the United Kingdom, Canada, Croatia, Iceland, Malta, Morocco, Spain, and the United States. The series premiered on HBO in the United States on April 17, 2011, and its seventh season ended on August 27, 2017. The series will conclude with its eighth season premiering in 2019.", prompt : "Description"},
+                        {name : "description", value : "Game of Thrones is an American fantasy drama television series created by David Benioff and D. B. Weiss. It is an adaptation of A Song of Ice and Fire, George R. R. Martin's series of fantasy novels, the first of which is A Game of Thrones. It is filmed in Belfast and elsewhere in the United Kingdom, Canada, Croatia, Iceland, Malta, Morocco, Spain, and the United States. The series premiered on HBO in the United States on April 17, 2011, and its seventh season ended on August 27, 2017. The series will conclude with its eighth season premiering in 2019.", prompt : "Description"},
 		                {name : "director", value : "Alan Taylor et al", prompt : "Director"},
 		                {name : "datePublished", value : "2011-04-17", prompt : "Release Date"}
                 ]
@@ -38,31 +38,29 @@ var server_data = {
     }
 };
 
-var PELICULAS_EDITABLES = []    // Variable de datos para ocultar o mostrar
+var arrayEdit=[];
 
 // TODO: Componente edit-form
 Vue.component('edit-form', {
-    template: "#editForm",          // Plantilla
-    props: ["param", "indice"],     // Parámetros
-    methods: {                      // Métodos
-        closeForm : function (ind) {
-            PELICULAS_EDITABLES.splice(PELICULAS_EDITABLES.indexOf(ind), 1);
+    template: '#editForm',
+    props: ['pelicula','pos'],
+    methods: {
+        closeForm: function(pos){
+            arrayEdit.splice(arrayEdit.indexOf(pos),1);
         }
     }
-});
+})
 
 // TODO: Componente item-data
 Vue.component('item-data', {
-    template: "#itemData",
-    props: ["param", "indice"],
+    template: '#itemData',
+    props: ["pelicula", "pos"],
     methods: {
-        toggleEditFormVisibility: function (ind) {
-            PELICULAS_EDITABLES.push(ind);
+        toggleEditFormVisibility: function(pos){
+            arrayEdit.push(pos);
         }
     }
-}) 
-/*Props are custom attributes you can register on a component.
-When a value is passed to a prop attribute, it becomes a property on that component instance.*/
+})
 
 // Aplicación VueJS
 // La aplicación recibe los datos en la variable de datos "col"
@@ -70,7 +68,6 @@ var app = new Vue({
     el: '#app',
     data: {
         col: server_data,
-        pel_edi: PELICULAS_EDITABLES,
+        editArr:arrayEdit
     }
 });
-

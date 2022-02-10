@@ -38,13 +38,13 @@ var server_data = {
     }
 };
 
-var PELICULAS_EDITABLES = []
+var PELICULAS_EDITABLES = []    // Variable de datos para ocultar o mostrar
 
 // TODO: Componente edit-form
 Vue.component('edit-form', {
-    template: "#editForm",
-    props: ["param", "indice"],
-    methods: {
+    template: "#editForm",          // Plantilla
+    props: ["param", "indice"],     // Parámetros
+    methods: {                      // Métodos
         closeForm : function (ind) {
             PELICULAS_EDITABLES.splice(PELICULAS_EDITABLES.indexOf(ind), 1);
         }
@@ -53,13 +53,8 @@ Vue.component('edit-form', {
 
 // TODO: Componente item-data
 Vue.component('item-data', {
-    props: ["param", "indice"],
     template: "#itemData",
-    data() {
-        return {
-            editando: false
-        }
-    },
+    props: ["param", "indice"],
     methods: {
         toggleEditFormVisibility: function (ind) {
             PELICULAS_EDITABLES.push(ind);
@@ -75,7 +70,7 @@ var app = new Vue({
     el: '#app',
     data: {
         col: server_data,
-        pel_edi: PELICULAS_EDITABLES
+        pel_edi: PELICULAS_EDITABLES,
     }
 });
 

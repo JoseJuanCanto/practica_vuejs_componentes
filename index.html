@@ -22,6 +22,11 @@
                 <h1 class="display-4" id="title">{{ col.collection.title }}</h1>
             </div>
             <div class="card-group">
+            <!-- Dentro de los bloques v-for tenemos acceso completo a las propiedades del ámbito principal. 
+            v-for también admite un segundo argumento opcional para el índice del elemento actual. 
+            Para proporcionar a Vue una sugerencia para que pueda rastrear la identidad de cada nodo y, por lo tanto, 
+            reutilizar y reordenar los elementos existentes, debe proporcionar un atributo key único para cada elemento. 
+            Un valor ideal para key sería el ID único de cada elemento.-->
                 <div v-for="(item,index) in col.collection.items" :key="index" class="card">
                     <item-data v-bind:param="item" :indice="index" v-if="!pel_edi.includes(index)"> </item-data>
                     <div is="edit-form" v-bind:param="item" :indice="index" v-else></div>
@@ -33,10 +38,10 @@
         <script type="text/x-template" id="editForm">
             <!-- Crear Formulario -->
             <div class="card-body">
-                <div v-for="(dat,cont) in param.data">
-                    <h5 class="card-text">{{dat.prompt}}</h5>
-                    <input v-if="cont != 1" type="text" class="card-text" :value="dat.value" :id="dat.name+indice" v-model="dat.value"/>
-                    <textarea v-else :value="dat.value" rows="4" cols="50"  :id="dat.name+indice" v-model="dat.value"></textarea>
+                <div v-for="(dato,cont) in param.data">
+                    <h5 class="card-text">{{dato.prompt}}</h5>
+                    <input v-if="cont != 1" type="text" class="card-text" :value="dato.value" :id="dato.name+indice" v-model="dato.value"/>
+                    <textarea v-else :value="dato.value" rows="4" cols="50"  :id="dato.name+indice" v-model="dato.value"></textarea>
                 </div>
                 <br/>
                 <button  v-on:click="closeForm(indice)" class="btn btn-primary">Cerrar</button>

@@ -38,26 +38,44 @@ var server_data = {
     }
 };
 
+var PELICULAS_EDITABLES = []
 
 // TODO: Componente edit-form
 Vue.component('edit-form', {
-    template: '#editForm'
-})
+    template: "#editForm",
+    props: ["param", "indice"],
+    methods: {
+        closeForm : function (ind) {
+            PELICULAS_EDITABLES.splice(PELICULAS_EDITABLES.indexOf(ind), 1);
+        }
+    }
+});
 
 // TODO: Componente item-data
 Vue.component('item-data', {
-    template: '#itemData',
-    props: {
-        peli: Object,
+    props: ["param", "indice"],
+    template: "#itemData",
+    data() {
+        return {
+            editando: false
+        }
+    },
+    methods: {
+        toggleEditFormVisibility: function (ind) {
+            PELICULAS_EDITABLES.push(ind);
+        }
     }
-})  
+}) 
+/*Props are custom attributes you can register on a component.
+When a value is passed to a prop attribute, it becomes a property on that component instance.*/
 
 // Aplicación VueJS
 // La aplicación recibe los datos en la variable de datos "col"
 var app = new Vue({
     el: '#app',
     data: {
-        col: server_data
+        col: server_data,
+        pel_edi: PELICULAS_EDITABLES
     }
 });
 
